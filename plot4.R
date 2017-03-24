@@ -8,6 +8,7 @@ if(!file.exists('data.zip')){
 }
 # Unzip dat.zip to household_power_consumption.txt
 unzip("data.zip") 
+
 ##Read the data in to R
 plotData <- read.table("household_power_consumption.txt",header = TRUE, sep= ";", na.strings="?" )
 
@@ -15,13 +16,12 @@ plotData <- read.table("household_power_consumption.txt",header = TRUE, sep= ";"
 finalData <- plotData[plotData$Date %in% c("1/2/2007","2/2/2007"),]
 SetTime <-strptime(paste(finalData$Date, finalData$Time, sep=" "),"%d/%m/%Y %H:%M:%S")
 finalData <- cbind(SetTime, finalData)
-##
 
 ## Open device
 if(!file.exists('myfigure')) dir.create('myfigure')
 png(filename = './myfigure/plot4.png', width = 480, height = 480, units='px')
 
-## Generating Plot 4
+## Generating Plot 4: density smooth with matrix (2,2)
 labels <- c("Sub_metering_1","Sub_metering_2","Sub_metering_3")
 columnlines <- c("black","red","blue")
 par(mfrow=c(2,2))

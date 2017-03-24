@@ -8,6 +8,7 @@ if(!file.exists('data.zip')){
 }
 # Unzip dat.zip to household_power_consumption.txt
 unzip("data.zip") 
+
 ##Read the data in to R
 plotData <- read.table("household_power_consumption.txt",header = TRUE, sep= ";", na.strings="?" )
 
@@ -20,7 +21,7 @@ finalData <- cbind(SetTime, finalData)
 if(!file.exists('myfigure')) dir.create('myfigure')
 png(filename = './myfigure/plot3.png', width = 480, height = 480, units='px')
 
-## Generating Plot 3
+## Generating Plot 3 : density smooth
 columnlines <- c("black", "red", "blue")
 labels <- c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
 plot(finalData$SetTime, finalData$Sub_metering_1, type="l", col=columnlines[1], xlab="", ylab="Energy sub metering")
